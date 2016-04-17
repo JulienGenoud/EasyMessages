@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">EASY MESSAGES</string>
+    <string name="action_settings">settings</string>
+    <string name="search_hint_messages">search messages…</string>
+    <string name="search_hint_contacts">search contacts...</string>
+</resources>
