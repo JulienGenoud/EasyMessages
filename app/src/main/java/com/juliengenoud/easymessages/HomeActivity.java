@@ -3,11 +3,13 @@ package com.juliengenoud.easymessages;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.juliengenoud.easymessages.adapters.MessagesFragmentPagerAdapter;
+import com.juliengenoud.easymessages.db.AppPreferences;
 
 /**
  * Author : juliengenoud
@@ -30,6 +33,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ActionBar bar = getSupportActionBar();
+        if (bar != null) {
+            bar.setBackgroundDrawable(new ColorDrawable(new AppPreferences(getApplicationContext()).getColor()));
+        }
 
         Snackbar
                 .make(findViewById(R.id.container), "Invite some friends or familly to use the app", Snackbar.LENGTH_INDEFINITE)
@@ -44,6 +51,16 @@ public class HomeActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment()).commit();
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ActionBar bar = getSupportActionBar();
+        if (bar != null) {
+            bar.setBackgroundDrawable(new ColorDrawable(new AppPreferences(getApplicationContext()).getColor()));
         }
     }
 
@@ -78,6 +95,13 @@ public class HomeActivity extends AppCompatActivity {
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
+
+                //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

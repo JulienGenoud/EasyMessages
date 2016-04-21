@@ -3,6 +3,7 @@ package com.juliengenoud.easymessages.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -11,19 +12,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.juliengenoud.easymessages.R;
+import com.juliengenoud.easymessages.adapters.Contact;
+import com.juliengenoud.easymessages.adapters.ContactAdatper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author : juliengenoud
  * 17/04/16
  **/
-public class ContactFragment  extends Fragment implements SearchView.OnQueryTextListener {
+public class ContactFragment  extends Fragment implements SearchView.OnQueryTextListener , ContactAdatper.OnItemClickListener{
 
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-//    private ContactAdatper mBookMe5BuisnessAdatper;
+    private ContactAdatper mContactAdatperAdatper;
 
     public static ContactFragment newInstance() {
         return new ContactFragment();
@@ -61,8 +67,30 @@ public class ContactFragment  extends Fragment implements SearchView.OnQueryText
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        //setUpGrid((RecyclerView) view.findViewById(R.id.mounth_recycler));
         super.onViewCreated(view, savedInstanceState);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+
+        mContactAdatperAdatper = new ContactAdatper(this.getContext(), this);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        mRecyclerView.setAdapter(mContactAdatperAdatper);
+//        mRecyclerView.setLayoutManager(new RecyclerView.LayoutManager() {
+//            @Override
+//            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+//                RecyclerView.LayoutParams a;
+//                a.
+//                return a;
+//            }
+//        });
+
+        List<Contact> contacts = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            contacts.add(new Contact("Julien Genoud", String.valueOf(i)));
+        }
+
+        mContactAdatperAdatper.setContacts(contacts);
+
     }
 
 
@@ -73,7 +101,12 @@ public class ContactFragment  extends Fragment implements SearchView.OnQueryText
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        // mAdapter.getFilter().filter(newText);
+        mContactAdatperAdatper.getFilter().filter(newText);
         return false;
+    }
+
+    @Override
+    public void onItemClick(Contact item) {
+        Toast.makeText(getContext(), item.getName() + " " + item.getDescription(), Toast.LENGTH_LONG).show();
     }
 }

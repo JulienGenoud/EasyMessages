@@ -20,6 +20,9 @@
             android:name=".HomeActivity"
             android:theme="@style/HomeTheme"/>
         <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/HomeTheme"/>
+        <activity
             android:name=".InviteActivity"
             android:theme="@style/HomeTheme"/>
 

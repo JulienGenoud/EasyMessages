@@ -31,6 +31,8 @@ public class MessagesFragmentPagerAdapter extends FragmentPagerAdapter {
                 return ContactFragment.newInstance();
             case 1:
                 return MessageFragment.newInstance();
+            case 2:
+                return MessageFragment.newInstance();
             default:
                 return ContactFragment.newInstance();
         }

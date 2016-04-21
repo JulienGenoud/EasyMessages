@@ -3,4 +3,13 @@
     <string name="action_settings">settings</string>
     <string name="search_hint_messages">search messages…</string>
     <string name="search_hint_contacts">search contacts...</string>
+
+    <string-array name="name">
+        <item>Milan</item>
+        <item>Beijing</item>
+        <item>Paris</item>
+    </string-array>
+
+
+
 </resources>
