@@ -26,6 +26,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.button).setOnClickListener(this);
 
 
+        ((EditText)findViewById(R.id.name_e)).setText(new AppPreferences(getApplicationContext()).getName());
+        ((EditText)findViewById(R.id.surname_e)).setText(new AppPreferences(getApplicationContext()).getSurname());
+
+
         ((EditText)findViewById(R.id.name_e)).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -39,8 +43,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-                s.get
-
+                new AppPreferences(getApplicationContext()).setName(s.toString());
             }
         });
         ((EditText)findViewById(R.id.surname_e)).addTextChangedListener(new TextWatcher() {
@@ -56,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                new AppPreferences(getApplicationContext()).setSurname(s.toString());
             }
         });
 
