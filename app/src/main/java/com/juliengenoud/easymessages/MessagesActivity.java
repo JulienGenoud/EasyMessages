@@ -1,15 +1,15 @@
 package com.juliengenoud.easymessages;
 
 import android.app.ListActivity;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.juliengenoud.easymessages.db.CommentsDataSource;
 import com.juliengenoud.easymessages.db.Message;
+import com.juliengenoud.easymessages.db.MessageDataSource;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
  * 24/04/16
  **/
 public class MessagesActivity extends ListActivity {
-    private CommentsDataSource datasource;
+    private MessageDataSource datasource;
     private TextView mMess;
 
     @Override
@@ -25,10 +25,10 @@ public class MessagesActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        datasource = new CommentsDataSource(this);
+        datasource = new MessageDataSource(this);
         try {
             datasource.open();
-        } catch (SQLException e) {
+        } catch (SQLiteException e) {
             e.printStackTrace();
         }
 
@@ -75,7 +75,7 @@ public class MessagesActivity extends ListActivity {
     protected void onResume() {
         try {
             datasource.open();
-        } catch (SQLException e) {
+        } catch (SQLiteException e) {
             e.printStackTrace();
         }
         super.onResume();

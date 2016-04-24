@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * Author : juliengenoud
  * 24/04/16
  **/
-public class CommentsDataSource {
+public class MessageDataSource {
 
     // Database fields
     private SQLiteDatabase database;
@@ -21,11 +21,11 @@ public class CommentsDataSource {
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
             MySQLiteHelper.COLUMN_MESSAGE };
 
-    public CommentsDataSource(Context context) {
+    public MessageDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
     }
 
-    public void open() throws SQLException {
+    public void open() throws SQLiteException {
         database = dbHelper.getWritableDatabase();
     }
 
@@ -39,7 +39,7 @@ public class CommentsDataSource {
         long insertId = database.insert(MySQLiteHelper.TABLE_MESSAGES, null,
                 values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_MESSAGES,
-                allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+                allColumns, MySQLiteHelper.COLUMN_ID + " = " + i nsertId, null,
                 null, null, null);
         cursor.moveToFirst();
         Message newMessage = cursorToMessage(cursor);
