@@ -1,6 +1,7 @@
 package com.juliengenoud.easymessages.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.juliengenoud.easymessages.MessagesActivity;
 import com.juliengenoud.easymessages.R;
 import com.juliengenoud.easymessages.adapters.Contact;
 import com.juliengenoud.easymessages.adapters.ContactAdatper;
@@ -108,5 +110,10 @@ public class ContactFragment  extends Fragment implements SearchView.OnQueryText
     @Override
     public void onItemClick(Contact item) {
         Toast.makeText(getContext(), item.getName() + " " + item.getDescription(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onCallClick(Contact item) {
+        startActivity(new Intent(getContext(), MessagesActivity.class));
     }
 }

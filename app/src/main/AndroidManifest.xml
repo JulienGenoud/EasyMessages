@@ -25,7 +25,9 @@
         <activity
             android:name=".InviteActivity"
             android:theme="@style/HomeTheme"/>
-
+        <activity
+            android:name=".MessagesActivity"
+            android:theme="@style/HomeTheme"/>
 
     </application>
 

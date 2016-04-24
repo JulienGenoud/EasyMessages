@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class ContactAdatper extends RecyclerView.Adapter<ContactAdatper.ViewHold
 
     public interface OnItemClickListener {
         void onItemClick(Contact item);
+        void onCallClick(Contact item);
     }
 
     public ContactAdatper(final Context context, OnItemClickListener listener) {
@@ -88,6 +90,8 @@ public class ContactAdatper extends RecyclerView.Adapter<ContactAdatper.ViewHold
         TextView mTextCatFact;
         @Bind(R.id.text_type)
         TextView mTextType;
+        @Bind(R.id.button_message)
+        Button mButton;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -99,6 +103,12 @@ public class ContactAdatper extends RecyclerView.Adapter<ContactAdatper.ViewHold
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(item);
+                }
+            });
+            mButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onCallClick(item);
                 }
             });
         }
